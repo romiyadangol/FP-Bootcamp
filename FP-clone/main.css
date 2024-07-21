@@ -1,0 +1,42 @@
+*{
+    font-family: "Roboto Slab", serif;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+img{
+    width: 150px;
+    cursor: pointer;
+}
+.nav-items{
+    border: 1px solid #ccc;
+    padding-right: 30px;
+    border-radius: 30px;
+}
+.nav-items ul{
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+    align-items: center;
+}
+.nav-items li{
+    list-style: none;
+    display: flex;
+    font-size: 16px;
+    font-weight:600;
+    cursor: pointer;
+}
+.authentication button{
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
