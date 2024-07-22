@@ -4,18 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp Form</title>
-    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-    <div id="signup-container" class="signUp">
-        <div class="signUp-content">
+    <div id="signIn-container" class="signIn">
+        <div class="signIn-content">
             <button id="close" class="close" onclick="closeModal()">&times;</button>
-            <form id="signup_form" class="form">
-                <div class="form-field">
-                    <label for="username">Username:</label>
-                    <input type="text" name="name" id="name" autocomplete="off">
-                    <small></small>
-                </div>
+            <form id="signIn_form" class="form">
 
                 <div class="form-field">
                     <label for="email">Email:</label>
@@ -30,17 +25,11 @@
                 </div>
 
                 <div class="form-field">
-                    <label for="confirm-password">Confirm Password:</label>
-                    <input type="password" name="confirm-password" id="confirm_password" autocomplete="off">
-                    <small></small>
-                </div>
-
-                <div class="form-field">
                     <button type="submit" class="submit-btn">Submit</button>
                 </div>
             </form>
         </div>
     </div>
-    <script src="../script/script.js"></script>
+    <script src="../script/login.js"></script>
 </body>
 </html>
