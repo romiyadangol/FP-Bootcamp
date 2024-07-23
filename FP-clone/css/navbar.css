@@ -1,0 +1,62 @@
+* {
+    font-family: "Outfit", Sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+img {
+    width: 150px;
+    cursor: pointer;
+}
+
+.nav-items {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.nav-items ul {
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+    align-items: center;
+}
+
+.nav-items li {
+    list-style: none;
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.authentication .button {
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 40px;
+}

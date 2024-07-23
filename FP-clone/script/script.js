@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById('signup_form');
     const name = document.getElementById('name');
@@ -10,9 +8,40 @@ document.addEventListener("DOMContentLoaded", function() {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         if (validate()) {
-            form.submit(); 
-            window.location.href = 'index.html';
-            console.log('Form submitted');
+            const mockData = {
+                username: name.value.trim(),
+                email: email.value.trim(),
+                password: password.value.trim(),
+                confirmPassword: confirmPassword.value.trim()
+            };
+
+            fetch('https://jsonplaceholder.typicode.com/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(mockData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                    console.log('Response data:', data);
+                    window.location.href = 'index.html'; 
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the form.');
+            });
+
+            let storeData = JSON.parse(localStorage.getItem('mockData'));
+            if (!Array.isArray(storeData)) {
+                storeData = [];
+            }
+            storeData.push(mockData);
+            localStorage.setItem('mockData', JSON.stringify(mockData));
+            console.log('SignUp successful', mockData);
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            },2000)
         }
     });
 
@@ -50,12 +79,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function isValid(email) {
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; 
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailRegex.test(email);
     }
 
     function validatePassword(password) {
-        const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; 
+        const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         return re.test(password);
     }
 
@@ -75,7 +104,10 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
 function closeModal() {
     document.getElementById('signup-container').style.display = 'none';
     window.location.href = 'index.html';
 }
+
+

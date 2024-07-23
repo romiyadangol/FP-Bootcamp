@@ -6,9 +6,46 @@ document.addEventListener("DOMContentLoaded", function() {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         if (validate()) {
-            form.submit(); 
-            window.location.href = 'index.html';
-            console.log('Form submitted');
+            const mockData = {
+                email: email.value.trim(),
+                password: password.value.trim()
+            };
+
+            // fetch('https://jsonplaceholder.typicode.com/users')
+            // .then(response => response.json())
+            // .then(data => {
+            //     const user = data.find(user => user.email === mockData.email && user.password === mockData.password);
+            //     if (user) {
+            //         alert('Login successful');
+            //         localStorage.setItem(email.value, data.token);
+            //         window.location.href = 'dashboard.html';
+            //     }
+            // })
+            // .catch(error => {
+            //     console.error('Error:', error);
+            //     alert('An error occurred while submitting the form.');
+            // });
+            
+
+           const storeData = JSON.parse(localStorage.getItem('mockData'));  
+           if (storeData.email === mockData.email && storeData.password === mockData.password) {
+               alert('Login successful');
+               console.log("StoreData", storeData);
+               window.location.href = 'why-us.html';
+
+            //    setInterval(() => {
+            //     console.log("Checking Login status");
+            //    },5000);
+
+            //    setTimeout(() => {
+            //     window.location.href = 'index.html';
+            //    },2000);
+            //    console.log("StoreData", storeData);
+               
+            }
+              else {
+                alert('Invalid email or password');
+            }
         }
     });
 
