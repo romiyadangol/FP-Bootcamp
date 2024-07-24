@@ -1,91 +1,68 @@
 document.addEventListener("DOMContentLoaded", function() {
+
+    const URL = 'https://reqres.in/api/login';
+    const FIRST_NAME_REGEX = /^[a-zA-Z]{2,20}$/;
+    const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
     const form = document.getElementById('signup_form');
     const name = document.getElementById('name');
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirm_password');
 
+
+
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         if (validate()) {
             const mockData = {
-                username: name.value.trim(),
+                name: name.value.trim(),
                 email: email.value.trim(),
                 password: password.value.trim(),
                 confirmPassword: confirmPassword.value.trim()
             };
-
-            fetch('https://jsonplaceholder.typicode.com/users', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(mockData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                    console.log('Response data:', data);
-                    window.location.href = 'index.html'; 
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while submitting the form.');
-            });
-
-            let storeData = JSON.parse(localStorage.getItem('mockData'));
-            if (!Array.isArray(storeData)) {
-                storeData = [];
-            }
-            storeData.push(mockData);
-            localStorage.setItem('mockData', JSON.stringify(mockData));
-            console.log('SignUp successful', mockData);
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            },2000)
+            SignUpUser(mockData);
         }
     });
 
     function validate() {
         clearErrors();
 
-        let valid = true;
+        let isValid = true;
 
-        if (!validateUsername(name.value.trim())) {
+        if (!validateName(name.value.trim())) {
             setError(name, 'Username must be 3-20 characters long and can include letters, numbers, and underscores');
-            valid = false;
+            isValid = false;
         }
 
-        if (!isValid(email.value.trim())) {
+        if (!validateEmail(email.value.trim())) {
             setError(email, 'Invalid email address');
-            valid = false;
+            isValid = false;
         }
 
         if (!validatePassword(password.value.trim())) {
             setError(password, 'Password must be at least 8 characters long and include at least one letter and one number');
-            valid = false;
+            isValid = false;
         }
 
         if (password.value.trim() !== confirmPassword.value.trim()) {
             setError(confirmPassword, 'Passwords do not match');
-            valid = false;
+            isValid = false;
         }
-
-        return valid;
+        return isValid;
     }
 
-    function validateUsername(username) {
-        const re = /^[a-zA-Z0-9_]{3,20}$/;
-        return re.test(username);
+    function validateName(username) {
+        return FIRST_NAME_REGEX.test(username);
     }
 
-    function isValid(email) {
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        return emailRegex.test(email);
+    function validateEmail(email) {
+        return EMAIL_REGEX.test(email);
     }
 
     function validatePassword(password) {
-        const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        return re.test(password);
+        return PASSWORD_REGEX.test(password);
     }
 
     function setError(element, message) {
@@ -103,11 +80,42 @@ document.addEventListener("DOMContentLoaded", function() {
             small.innerText = '';
         });
     }
+
+    function SignUpUser(mockData){
+        fetch(URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(mockData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response data:', data);
+            if(data.id){
+                alert('SignUp successful');
+                localStorage.setItem('signUpData', JSON.stringify(mockData));
+                location.href = 'index.html';
+            }
+            else{
+                alert('SignUp failed');
+            
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while submitting the form.');
+        });
+    }
+    
+    function closeModal() {
+        document.getElementById('signUp-container').style.display = 'none';
+        location.href = 'index.html';
+    }
+    if(closeModalBtn){
+        closeModalBtn.addEventListener('click', closeModal);
+    }
 });
 
-function closeModal() {
-    document.getElementById('signup-container').style.display = 'none';
-    window.location.href = 'index.html';
-}
 
 

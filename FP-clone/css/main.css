@@ -24,14 +24,14 @@
     position: relative;
 }
 
-.intro {
+.introduction {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 50px;
 }
 
-.imgg img {
+.img-fleetPanda img {
     width: 200px;
     display: flex;
     justify-content: center;
@@ -63,7 +63,7 @@
     margin-top: 100px; 
 }
 
-.orange-text {
+.highlight-text {
     color: #fa6400;
 }
 
@@ -89,13 +89,13 @@ p {
     margin-left: 50px;
 }
 
-.btnn {
+.cta-buttons {
     display: flex;
     gap: 10px;
     margin-top: 30px;
 }
 
-.check {
+.btn-pricing {
     padding: 14px 20px;
     font-size: 16px;
     border: none;
@@ -105,7 +105,7 @@ p {
     cursor: pointer;
 }
 
-.form {
+.btn-demo {
     padding: 10px 20px;
     font-size: 16px;
     border: none;
@@ -115,21 +115,21 @@ p {
     cursor: pointer;
 }
 
-.content-description {
+.features {
     margin-top: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.card {
+.feature-cards {
     display: grid;
     padding: 50px;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
-.card-description {
+.feature-card {
     border: 1px solid #504c4c;
     padding: 10px;
     border-radius: 5px;
@@ -137,16 +137,16 @@ p {
     margin-bottom: 20px;
 }
 
-.card-description span {
+.feature-card span {
     font-weight: 500;
     font-size: 20px;
 }
 
-.card-description p {
+.feature-card p {
     font-size: 16px;
 }
 
-.join {
+.newsletter {
     background-color: black;
     color: #afaeae;
     padding: 50px 100px;
@@ -156,20 +156,20 @@ p {
     margin-bottom: 30px;
 }
 
-.policy h2 {
+.newsletter-info h2 {
     font-size: 30px;
 }
 
-.policy p {
+.newsletter-info p {
     font-size: 20px;
     margin-bottom: 0;
 }
 
-.policy span {
+.newsletter-info span {
     font-size: 13px;
 }
 
-.mail input {
+.newsletter-signUp input {
     width: 350px;
     padding: 10px;
     border-radius: 3px;
@@ -177,7 +177,7 @@ p {
     margin-right: 10px;
 }
 
-.mail button {
+.newsletter-signUp button {
     width: 120px;
     padding: 10px;
     border-radius: 3px;
@@ -223,23 +223,23 @@ p {
     margin-bottom: 20px;
 }
 
-.footer1 {
+.footer-bottom {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-left: 133px;
 }
 
-.footer1 span {
+.footer1footer-bottom span {
     margin-bottom: 5px;
 }
 
-.footer1 p {
+.footer-bottom p {
     font-size: 14px;
     margin-bottom: 2px;
 }
 
-.rights {
+.footer-rights {
     font-size: 13px;
     color: rgb(141, 140, 140);
 }

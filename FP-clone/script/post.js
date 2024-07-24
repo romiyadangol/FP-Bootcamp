@@ -1,10 +1,7 @@
-fetch('navbar.html')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('navbar').innerHTML = data;
-    });
+import { loadNavbar } from './loadNavbar.js';
 
 document.addEventListener('DOMContentLoaded', function() {
+    loadNavbar();
     const postContainer = document.getElementById('posts');
 
     fetch('https://jsonplaceholder.typicode.com/posts')
