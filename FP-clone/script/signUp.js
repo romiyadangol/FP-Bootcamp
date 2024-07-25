@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(data => {
             console.log('Response data:', data);
-            if(data.id){
+            if(data){
                 alert('SignUp successful');
                 localStorage.setItem('signUpData', JSON.stringify(mockData));
                 location.href = 'index.html';

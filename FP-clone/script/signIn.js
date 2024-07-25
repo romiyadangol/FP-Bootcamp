@@ -1,4 +1,4 @@
-import { request } from './request.js';
+// import { request } from './request.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     const URL = 'https://reqres.in/api/register';
@@ -19,19 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 password: password.value.trim()
             };
             console.log('Posting data:', mockData);
-            request('POST', URL, mockData)
-            .then(data => {
-                if (data && data.token) {
-                    alert('Login successful');
-                    localStorage.setItem('signIn-data', JSON.stringify(data.token));
-                    location.href = 'home.html'; 
-                } else {
-                    alert('Invalid email or password');
-                }
-            })
-            .catch(error => {
-                console.error('Request failed:', error);
-            });
+            loginUserData(mockData);
         }
     });
 
@@ -72,6 +60,27 @@ document.addEventListener("DOMContentLoaded", function() {
             element.classList.remove('error');
             const small = element.querySelector('small');
             small.innerText = '';
+        });
+    }
+    function loginUserData(mockData){
+        fetch(URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(mockData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response data:', data);
+            alert('Successfully logged in');
+            if(data && data.token){
+                localStorage.setItem('signIn-data', JSON.stringify(data.token));
+                location.href = 'home.html';
+            }
+        })
+        .catch(error => {
+            console.error('Request failed:', error);
         });
     }
 

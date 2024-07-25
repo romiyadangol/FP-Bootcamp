@@ -1,52 +1,81 @@
-export function request(method, url, data) {
-    switch (method) {
-        case 'POST':
-            return handlePost(url,data);
+export async function request(method, url, data) {
+    try {
+        switch (method) {
+            case 'POST':
+                return await handlePost(url, data);
 
-        case 'GET':
-            return handleGet(url);
+            case 'GET':
+                return await handleGet(url);
+
+            case 'DELETE':
+                return await handleDelete(url);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return serialization([]);
     }
 }
 
-function handlePost(url, data) {
-    return fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('ResponseData:', data);
-        return data;
-    })
-    .catch(error => {
+async function handlePost(url, data) {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const dataResponse = await response.json();
+        console.log('ResponseData:', dataResponse);
+        return serialization(dataResponse);
+    } catch (error) {
         console.error('Error:', error);
-        return serialization(data);
-    });
+        return serialization([data]);
+    }
 
 }
 
-function handleGet(url){
-    return fetch(url)
-    .then(response => response.json())
-    .then(data => {
+async function handleGet(url){
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
         console.log('ResponseData:', data);
-        return data;
-    })
-    .catch(error => {
-        console.error('Error:', error);
         return serialization(data);
-    });
+    } catch (error) {
+        console.error('Error:', error);
+        return serialization([]);
+    }
+}
+
+async function handleDelete(url){
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('Response Deleted:', data);
+        return serialization(data);
+    } catch (error) {
+        console.error('Error', error);
+        return serialization([]);
+    }
 }
 
 function serialization(data) {
-        const finalMapData = data.map(item => {
+    let finalMapData;
+    if(Array.isArray(data)){
+        finalMapData = data.map((datum) => {
             const mapData = {};
-            mapData['email'] = item.email;
-            mapData['password'] = item.password;
+            mapData['userId'] = datum['userId']
+            mapData['blogTitle'] = datum['title']
+            mapData['blogDescription'] = datum['body']
             return mapData;
         });
-        return finalMapData;
+    }
+    else{
+        finalMapData = {
+            "userID" : data.userID,
+            "blogTitle" : data.title,
+            "blogDescription" : data.body
+        }
+    }
+    return finalMapData;    
 }
