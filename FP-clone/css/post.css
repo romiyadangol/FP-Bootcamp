@@ -175,3 +175,11 @@ svg:hover {
 .comment small {
     color: #555;
 }
+.main-container button{
+    padding: 10px 20px;
+    background: #f93;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
